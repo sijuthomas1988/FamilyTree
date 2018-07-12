@@ -8,9 +8,9 @@ public class PersonIndex {
 
     private Map<String, PersonImpl> personIndexList = new HashMap<>();
 
-    public void createPerson(String name, PersonImpl wifeOfPerson, PersonImpl fatherOfPerson){
+    public void createPerson(String name, PersonImpl wifeOfPerson, PersonImpl fatherOfPerson, PersonImpl.Gender gender){
         if(searchIndex(name) == null) {
-            PersonImpl person = new PersonImpl(wifeOfPerson, name, fatherOfPerson);
+            PersonImpl person = new PersonImpl(wifeOfPerson, name, fatherOfPerson, gender);
             person.setName(name);
             person.setWifeOfPerson(wifeOfPerson);
             addPersonToIndex(person);

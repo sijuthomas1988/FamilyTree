@@ -14,10 +14,26 @@ public class PersonImpl {
 
     private PersonImpl fatherOfPerson;
 
-    public PersonImpl(PersonImpl wifeOfPerson, String name, PersonImpl fatherOfPerson) {
+    public enum Gender{
+        MALE,
+        FEMALE;
+    }
+
+    private Gender gender;
+
+    public Gender getGender() {
+        return gender;
+    }
+
+    public void setGender(Gender gender) {
+        this.gender = gender;
+    }
+
+    public PersonImpl(PersonImpl wifeOfPerson, String name, PersonImpl fatherOfPerson, Gender gender) {
         this.wifeOfPerson = wifeOfPerson;
         this.name = name;
         this.fatherOfPerson = fatherOfPerson;
+        this.gender = gender;
     }
 
     public PersonImpl getWifeOfPerson() {
