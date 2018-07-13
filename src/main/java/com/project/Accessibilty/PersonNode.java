@@ -1,12 +1,17 @@
 package com.project.Accessibilty;
 
 import com.project.person.PersonImpl;
+import com.project.person.PersonPartner;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 public class PersonNode {
+
+    private static Map<String, PersonImpl> personMapIndex = new HashMap<>();
 
     public static NodeImpl<PersonImpl> createFamilytree(PersonImpl personImpl) {
         PersonImpl person = personImpl;
@@ -40,7 +45,7 @@ public class PersonNode {
         return temQueue;
     }
 
-    public List<PersonImpl> searchSisters(PersonImpl person) {
+    public static List<PersonImpl> searchSisters(PersonImpl person) {
         NodeImpl<PersonImpl> rootNode = createFamilytree(person.getFatherOfPerson());
         List<PersonImpl> temQueue = new LinkedList<>();
         if (rootNode.getChildern() == null) {
@@ -56,21 +61,21 @@ public class PersonNode {
         return temQueue;
     }
 
-    public PersonImpl searchFather(PersonImpl person) {
+    public static PersonImpl searchFather(PersonImpl person) {
         if (person.getFatherOfPerson().getGender() == PersonImpl.Gender.MALE) {
             return person.getFatherOfPerson();
         }
         return null;
     }
 
-    public PersonImpl searchMother(PersonImpl person) {
+    public static PersonImpl searchMother(PersonImpl person) {
         if (person.getFatherOfPerson().getGender() == PersonImpl.Gender.FEMALE) {
             return person.getFatherOfPerson();
         }
         return null;
     }
 
-    public List<PersonImpl> searchSons(PersonImpl person) {
+    public static List<PersonImpl> searchSons(PersonImpl person) {
         NodeImpl<PersonImpl> rootNode = createFamilytree(person);
         List<PersonImpl> temQueue = new LinkedList<>();
         if (rootNode.getChildern() == null) {
@@ -86,7 +91,7 @@ public class PersonNode {
         return temQueue;
     }
 
-    public List<PersonImpl> searchDaughters(PersonImpl person) {
+    public static List<PersonImpl> searchDaughters(PersonImpl person) {
         NodeImpl<PersonImpl> rootNode = createFamilytree(person);
         List<PersonImpl> temQueue = new LinkedList<>();
         if (rootNode.getChildern() == null) {
@@ -102,7 +107,7 @@ public class PersonNode {
         return temQueue;
     }
 
-    public List<PersonImpl> searchCousins(PersonImpl person) {
+    public static List<PersonImpl> searchCousins(PersonImpl person) {
         List<PersonImpl> cousinList = new ArrayList<>();
         List<PersonImpl> personBrothers = searchBrothers(person.getFatherOfPerson());
         List<PersonImpl> personSisters = searchSisters(person.getFatherOfPerson());
@@ -116,19 +121,19 @@ public class PersonNode {
         return cousinList;
     }
 
-    public PersonImpl searchGrandFather(PersonImpl person) {
+    public static PersonImpl searchGrandFather(PersonImpl person) {
         PersonImpl personFirst = person.getFatherOfPerson();
         PersonImpl personsGrandFather = personFirst.getFatherOfPerson();
         return personsGrandFather;
     }
 
-    public PersonImpl searchGrandMother(PersonImpl person) {
+    public static PersonPartner searchGrandMother(PersonImpl person) {
         PersonImpl personFirst = person.getFatherOfPerson();
-        PersonImpl personsGrandMother = personFirst.getFatherOfPerson().getWifeOfPerson();
+        PersonPartner personsGrandMother = personFirst.getFatherOfPerson().getWifeOfPerson();
         return personsGrandMother;
     }
 
-    public List<PersonImpl> searchGrandSons(PersonImpl person) {
+    public static List<PersonImpl> searchGrandSons(PersonImpl person) {
         List<PersonImpl> setSonsOfPerson = searchSons(person);
         List<PersonImpl> tempList = new ArrayList<>();
         for(PersonImpl sonList : setSonsOfPerson){
@@ -142,7 +147,7 @@ public class PersonNode {
         return tempList;
     }
 
-        public List<PersonImpl> searchGrandDaughters (PersonImpl person) {
+        public static List<PersonImpl> searchGrandDaughters (PersonImpl person) {
             List<PersonImpl> setSonsOfPerson = searchSons(person);
             List<PersonImpl> tempList = new ArrayList<>();
             for(PersonImpl sonList : setSonsOfPerson){
@@ -156,25 +161,33 @@ public class PersonNode {
             return tempList;
         }
 
-        public List<PersonImpl> searchAunts (PersonImpl person){
+        public static List<PersonImpl> searchAunts (PersonImpl person){
             List<PersonImpl> personAunts = searchSisters(person.getFatherOfPerson());
             return personAunts;
         }
 
-        public List<PersonImpl> searchUncles (PersonImpl person){
+        public  static List<PersonImpl> searchUncles (PersonImpl person){
             List<PersonImpl> personUncles = searchBrothers(person.getFatherOfPerson());
             return personUncles;
         }
 
-        public void printHeirarchyTree (PersonImpl person,int level){
-            for (int i = 0; i < level; i++) {
-                System.out.println("\t");
-            }
-            System.out.println(person.getName());
-
-            List<PersonImpl> children = person.getChildrenOfPersonImpls();
-            for (PersonImpl person1 : children) {
-                printHeirarchyTree(person1, level + 1);
+    public static void setPersonIndex(PersonImpl person){
+        NodeImpl<PersonImpl> rootNode = new NodeImpl<>(person);
+        if(rootNode.getData().getName() != null){
+            personMapIndex.put(rootNode.getData().getName(), rootNode.getData());
+        }if(rootNode.getData().getChildrenOfPersonImpls() != null){
+            for(PersonImpl person1 : rootNode.getData().getChildrenOfPersonImpls()){
+                setPersonIndex(person1);
             }
         }
     }
+
+    public static Map<String, PersonImpl> getPersonMapIndex() {
+        return personMapIndex;
+    }
+
+    public static void setPersonMapIndex(Map<String, PersonImpl> personMapIndex) {
+        PersonNode.personMapIndex = personMapIndex;
+    }
+
+}

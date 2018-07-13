@@ -6,7 +6,7 @@ import java.util.List;
 
 public class PersonImpl {
 
-    private PersonImpl wifeOfPerson;
+    private PersonPartner wifeOfPerson;
 
     private String name;
 
@@ -29,18 +29,25 @@ public class PersonImpl {
         this.gender = gender;
     }
 
-    public PersonImpl(PersonImpl wifeOfPerson, String name, PersonImpl fatherOfPerson, Gender gender) {
+    public PersonImpl(PersonPartner wifeOfPerson, String name, PersonImpl fatherOfPerson, Gender gender) {
         this.wifeOfPerson = wifeOfPerson;
         this.name = name;
         this.fatherOfPerson = fatherOfPerson;
         this.gender = gender;
     }
 
-    public PersonImpl getWifeOfPerson() {
+    public PersonImpl(String name) {
+        this.name = name;
+    }
+
+    public PersonImpl(){
+    }
+
+    public PersonPartner getWifeOfPerson() {
         return wifeOfPerson;
     }
 
-    public void setWifeOfPerson(PersonImpl wifeOfPerson) {
+    public void setWifeOfPerson(PersonPartner wifeOfPerson) {
         this.wifeOfPerson = wifeOfPerson;
     }
 

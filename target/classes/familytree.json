@@ -1,0 +1,126 @@
+{
+    "name": "Evan",
+    "gender": "Male",
+    "wifeOfPerson": {
+      "name": "Diana",
+      "gender": "Female"
+    },
+    "childrenOfPersonImpls": [
+      {
+        "name": "John",
+        "gender": "Male",
+        "fatherOfPerson": {
+          "name": "Evan",
+          "gender": "Male"
+        }
+      },
+      {
+        "name": "Alex",
+        "gender": "Male",
+        "wifeOfPerson": {
+          "name": "Nancy",
+          "gender": "Female"
+        },
+        "fatherOfPerson": {
+          "name": "Evan",
+          "gender": "Male"
+        },
+        "childrenOfPersonImpls": [
+          {
+            "name": "Jacob",
+            "gender": "Male",
+            "fatherOfPerson": {
+              "name": "Alex",
+              "gender": "Male"
+            },
+            "wifeOfPerson": {
+              "name": "Rufi",
+              "gender": "Female"
+            },
+            "childrenOfPersonImpls": [
+              {
+                "name": "Bern",
+                "gender": "Male",
+                "fatherOfPerson": {
+                  "name": "Jacob",
+                  "gender": "Male"
+                }
+              },
+              {
+                "name": "George",
+                "gender": "Male",
+                "fatherOfPerson": {
+                  "name": "Jacob",
+                  "gender": "Male"
+                },
+                "wifeOfPerson": {
+                  "name": "Sofia",
+                  "gender": "Female"
+                }
+              }
+            ]
+          },
+          {
+            "name": "Shaun",
+            "gender": "Male",
+            "fatherOfPerson": {
+              "name": "Alex",
+              "gender": "Male"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Joe",
+        "gender": "Male",
+        "wifeOfPerson": {
+          "name": "Niki",
+          "gender": "Female"
+        },
+        "fatherOfPerson": {
+          "name": "Evan",
+          "gender": "Male"
+        },
+        "childrenOfPersonImpls": [
+          {
+            "name": "Piers",
+            "gender": "Male",
+            "fatherOfPerson": {
+              "name": "Joe",
+              "gender": "Male"
+            },
+            "wifeOfPerson": {
+              "name": "Pippa",
+              "gender": "Female"
+            },
+            "childrenOfPersonImpls": [
+              {
+                "name": "Sarah",
+                "gender": "Female",
+                "fatherOfPerson": {
+                  "name": "Piers",
+                  "gender": "Male"
+                },
+                "wifeOfPerson": {
+                  "name": "Peter",
+                  "gender": "male"
+                }
+              }
+            ]
+          },
+          {
+            "name": "Owen",
+            "gender": "Male",
+            "fatherOfPerson": {
+              "name": "Joe",
+              "gender": "Male"
+            },
+            "wifeOfPerson": {
+              "name": "Sally",
+              "gender": "Female"
+            }
+          }
+        ]
+      }
+    ]
+}
