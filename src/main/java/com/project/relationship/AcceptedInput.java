@@ -4,5 +4,6 @@ public enum AcceptedInput {
     HUSBAND,
     MOTHER,
     FATHER,
-    WIFE
+    WIFE,
+    PERSON
 }

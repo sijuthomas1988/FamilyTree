@@ -6,6 +6,15 @@ public class PersonPartner {
 
     private PersonImpl.Gender gender;
 
+    public PersonPartner(String name, PersonImpl.Gender gender){
+        this.gender = gender;
+        this.name = name;
+    }
+
+    public PersonPartner(){
+        //Do Nothing
+    }
+
     public String getName() {
         return name;
     }

@@ -14,6 +14,8 @@ public enum RelationshipType {
     GRANDSONS,
     GRANDDAUGHTERS,
     AUNTS,
-    UNCLES
+    UNCLES,
+    WIFE,
+    HUSBAND
 
 }

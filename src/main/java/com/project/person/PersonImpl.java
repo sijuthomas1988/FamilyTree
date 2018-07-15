@@ -36,7 +36,7 @@ public class PersonImpl {
         this.gender = gender;
     }
 
-    public PersonImpl(String name) {
+    public PersonImpl(String name, Gender gender) {
         this.name = name;
     }
 

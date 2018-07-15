@@ -68,9 +68,9 @@ public class PersonNode {
         return null;
     }
 
-    public static PersonImpl searchMother(PersonImpl person) {
-        if (person.getFatherOfPerson().getGender() == PersonImpl.Gender.FEMALE) {
-            return person.getFatherOfPerson();
+    public static PersonPartner searchMother(PersonImpl person) {
+        if (person.getFatherOfPerson().getWifeOfPerson().getGender() == PersonImpl.Gender.FEMALE) {
+            return person.getFatherOfPerson().getWifeOfPerson();
         }
         return null;
     }
@@ -188,6 +188,14 @@ public class PersonNode {
 
     public static void setPersonMapIndex(Map<String, PersonImpl> personMapIndex) {
         PersonNode.personMapIndex = personMapIndex;
+    }
+
+    public static void addPersonToIndex(PersonImpl person){
+        for(Map.Entry<String, PersonImpl> map : PersonNode.getPersonMapIndex().entrySet()){
+            if(map.getKey().equals(person.getName())){
+                map.setValue(person);
+            }
+        }
     }
 
 }
