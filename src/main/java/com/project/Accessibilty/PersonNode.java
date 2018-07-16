@@ -171,6 +171,11 @@ public class PersonNode {
             return personUncles;
         }
 
+    public  static PersonPartner searchWife (PersonImpl person){
+        PersonPartner personPartner = person.getWifeOfPerson();
+        return personPartner;
+    }
+
     public static void setPersonIndex(PersonImpl person){
         NodeImpl<PersonImpl> rootNode = new NodeImpl<>(person);
         if(rootNode.getData().getName() != null){

@@ -38,6 +38,7 @@ public class PersonImpl {
 
     public PersonImpl(String name, Gender gender) {
         this.name = name;
+        this.gender = gender;
     }
 
     public PersonImpl(){
