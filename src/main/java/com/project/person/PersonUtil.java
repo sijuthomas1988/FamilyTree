@@ -37,7 +37,8 @@ public class PersonUtil{
         ObjectMapper objectMapper = new ObjectMapper();
         try {
             ClassLoader classLoader = PersonUtil.class.getClassLoader();
-            objectMapper.writeValue(new FileOutputStream(classLoader.getResource("familytree.json").getFile()), person);
+            objectMapper.writeValue(new FileOutputStream(classLoader.getResource("/familytree.json").getFile()), person);
+            System.out.println("Updated the file successfully");
         } catch (IOException e) {
             e.getMessage();
         }
