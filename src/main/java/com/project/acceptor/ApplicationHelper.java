@@ -32,7 +32,7 @@ public class ApplicationHelper {
         } catch (IOException exception) {
             System.out.println("Error Parsing Information" + exception.getMessage());
         }
-        Map<String, String> map = new HashMap<>();
+        Map<String, String> map = new LinkedHashMap<>();
         for (String string2 : string.split("\\s+")) {
             map.put(string2.split("=")[0], string2.split("=")[1]);
         }
@@ -62,7 +62,7 @@ public class ApplicationHelper {
             ApplicationHelper.performSearchAction(map);
         } else {
             ApplicationHelper.addPersonAction(map);
-            PersonUtil.updateData();
+            //PersonUtil.updateData();
         }
 
 
@@ -199,6 +199,15 @@ public class ApplicationHelper {
                     strings.add(s.getName());
                 }
                 break;
+            case WIFE:
+                PersonPartner personPartnerValue = PersonNode.searchWife(person);
+                if(personPartnerValue == null){
+                    System.out.println("You are not married Yet" + person.getName());
+                }else {
+                    string1 = personPartnerValue.getName();
+                }
+
+
             default:
         }
         if (string1.isEmpty()) {
@@ -243,14 +252,14 @@ public class ApplicationHelper {
                     personList.add(new PersonImpl(addition, PersonImpl.Gender.MALE));
                     person.setChildrenOfPersonImpls(personList);
                     PersonNode.addPersonToIndex(person);
-                    System.out.println("Welcome to the Family " + person.getName());
+                    System.out.println("Welcome to the Family " + addition);
                 } else {
                     if (relationshipType.equals(RelationshipType.DAUGHTERS)) {
                         List<PersonImpl> personList = person.getChildrenOfPersonImpls();
                         personList.add(new PersonImpl(addition, PersonImpl.Gender.MALE));
                         person.setChildrenOfPersonImpls(personList);
                         PersonNode.addPersonToIndex(person);
-                        System.out.println("Welcome to the Family " + person.getName());
+                        System.out.println("Welcome to the Family " + addition);
                     }
                     break;
 
@@ -261,30 +270,30 @@ public class ApplicationHelper {
                     personList.add(new PersonImpl(addition, PersonImpl.Gender.MALE));
                     person.setChildrenOfPersonImpls(personList);
                     PersonNode.addPersonToIndex(person);
-                    System.out.println("Welcome to the Family " + person.getName());
+                    System.out.println("Welcome to the Family " + addition);
                 } else {
                     if (relationshipType.equals(RelationshipType.DAUGHTERS)) {
                         List<PersonImpl> personList = person.getChildrenOfPersonImpls();
                         personList.add(new PersonImpl(addition, PersonImpl.Gender.MALE));
                         person.setChildrenOfPersonImpls(personList);
                         PersonNode.addPersonToIndex(person);
-                        System.out.println("Welcome to the Family " + person.getName());
+                        System.out.println("Welcome to the Family " + addition);
                     }
                     break;
 
                 }
             case HUSBAND:
                 if(relationshipType.equals(RelationshipType.WIFE)){
-                    person.setWifeOfPerson(new PersonPartner(string, PersonImpl.Gender.FEMALE));
+                    person.setWifeOfPerson(new PersonPartner(addition, PersonImpl.Gender.FEMALE));
                     PersonNode.addPersonToIndex(person);
-                    System.out.println("Welcome to the Family " + person.getName());
+                    System.out.println("Welcome to the Family " + person.getWifeOfPerson().getName());
                 }
                 break;
             case WIFE:
                 if(relationshipType.equals(RelationshipType.HUSBAND)){
                     person.setWifeOfPerson(new PersonPartner(string, PersonImpl.Gender.MALE));
                     PersonNode.addPersonToIndex(person);
-                    System.out.println("Welcome to the Family " + person.getName());
+                    System.out.println("Welcome to the Family " + person.getWifeOfPerson().getName());
                 }
                 break;
             default:
