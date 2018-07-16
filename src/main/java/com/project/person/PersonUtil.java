@@ -7,11 +7,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.project.Accessibilty.PersonNode;
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -36,8 +32,8 @@ public class PersonUtil{
 
         ObjectMapper objectMapper = new ObjectMapper();
         try {
-            ClassLoader classLoader = PersonUtil.class.getClassLoader();
-            objectMapper.writeValue(new FileOutputStream(classLoader.getResource("/familytree.json").getFile()), person);
+            //ClassLoader classLoader = PersonUtil.class.getClassLoader();
+            objectMapper.writeValue(new BufferedWriter(new FileWriter("../config/familytree.json")), person);
             System.out.println("Updated the file successfully");
         } catch (IOException e) {
             e.getMessage();
@@ -51,7 +47,7 @@ public class PersonUtil{
 
             ObjectMapper objectMapper = new ObjectMapper();
             objectMapper.enable(MapperFeature.ACCEPT_CASE_INSENSITIVE_ENUMS);
-            PersonImpl person = objectMapper.readValue(new BufferedReader(new InputStreamReader(PersonUtil.class.getResourceAsStream("/familytree.json"))), PersonImpl.class);
+            PersonImpl person = objectMapper.readValue(new BufferedReader(new FileReader("../config/familytree.json")), PersonImpl.class);
            /* for(PersonImpl person1 : person.getChildrenOfPersonImpls()){
                 System.out.println(person1.getName());
                 System.out.println(person1.getFatherOfPerson().getName());
