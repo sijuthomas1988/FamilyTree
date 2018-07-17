@@ -1,6 +1,5 @@
 package com.project.acceptor;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.project.Accessibilty.PersonNode;
 import com.project.person.PersonImpl;
 import com.project.person.PersonPartner;
@@ -12,17 +11,19 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
-import static com.project.relationship.AcceptedInput.FATHER;
-
+/**
+ * Application Helper Class with all Utility Methods to accept Input and Provide Output.
+ * @author SKR
+ */
 public class ApplicationHelper {
 
+    /**
+     * Method call to accept Input from Console and save it into map of values.
+     */
     public static void executeProgram() {
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
         System.out.println("Input : ");
@@ -50,6 +51,10 @@ public class ApplicationHelper {
         }
     }
 
+    /**
+     * Determines which action to be performed based on Input. Either Search or Add.
+     * @param map Values Obtained from Console.
+     */
     public static void determineAction(Map<String, String> map) {
         boolean getAcceptedInput = false;
         Map.Entry<String, String> entry = map.entrySet().iterator().next();
@@ -62,12 +67,16 @@ public class ApplicationHelper {
             ApplicationHelper.performSearchAction(map);
         } else {
             ApplicationHelper.addPersonAction(map);
-            //PersonUtil.updateData();
+            PersonUtil.updateData();
         }
 
 
     }
 
+    /**
+     * Performs search Action depending on the parameter passed.
+     * @param map Values Obtained from Console.
+     */
     public static void performSearchAction(Map<String, String> map) {
         PersonImpl person = null;
         RelationshipType relationshipType = null;
@@ -218,6 +227,10 @@ public class ApplicationHelper {
 
     }
 
+    /**
+     * Performs Add Action depending on the parameter passed.
+     * @param map Values Obtained from Console.
+     */
     public static void addPersonAction(Map<String, String> map) {
         AcceptedInput acceptedInput = null;
         PersonImpl person = null;

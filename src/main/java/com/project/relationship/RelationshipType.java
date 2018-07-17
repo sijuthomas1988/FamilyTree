@@ -1,5 +1,9 @@
 package com.project.relationship;
 
+/**
+ * This documents "RelationshipType"
+ * @author SKR
+ */
 public enum RelationshipType {
 
     FATHER,
