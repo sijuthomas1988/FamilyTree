@@ -51,9 +51,9 @@ public class PersonNodeTest {
                 }
             }
             mock(PersonNode.class);
-            List<PersonImpl> sistersValue = PersonNode.searchBrothers(person1);
+            List<PersonImpl> sistersValue = PersonNode.searchSisters(person1);
             if(sistersValue.isEmpty()){
-                    Assert.assertEquals(null, sistersValue);
+                    Assert.assertEquals(0, sistersValue.size());
                 }
             }
 
@@ -105,9 +105,9 @@ public class PersonNodeTest {
         public void searchDaughters () {
             Assert.assertNotNull(PersonNodeTest.stubPersonObject());
             mock(PersonNode.class);
-            List<PersonImpl> listOfDaughters = PersonNode.searchSons(PersonNodeTest.stubPersonObject());
+            List<PersonImpl> listOfDaughters = PersonNode.searchDaughters(PersonNodeTest.stubPersonObject());
             if(listOfDaughters.isEmpty()){
-                Assert.assertEquals(null, listOfDaughters);
+                Assert.assertEquals(0, listOfDaughters.size());
             }
         }
 
@@ -157,7 +157,8 @@ public class PersonNodeTest {
                     person3 = person1;
                 }
             }
-            Assert.assertEquals("George", person2.getFatherOfPerson().getName());
+            PersonImpl person1 = PersonNode.searchGrandFather(person3);
+            Assert.assertEquals("George", person1.getName());
         }
 
         @Test
@@ -179,36 +180,89 @@ public class PersonNodeTest {
                     person3 = person1;
                 }
             }
-            Assert.assertEquals("Amy", person2.getFatherOfPerson().getWifeOfPerson().getName());
+            PersonImpl person1 = PersonNode.searchGrandFather(person3);
+            Assert.assertEquals("Amy", person1.getWifeOfPerson().getName());
         }
 
         @Test
         public void searchGrandSons () {
+            Assert.assertNotNull(PersonNodeTest.stubPersonObject());
+            mock(PersonNode.class);
+            NodeImpl<PersonImpl> nodeResult = PersonNode.createFamilytree(PersonNodeTest.stubPersonObject());
+            PersonImpl person = nodeResult.getData();
+            List<PersonImpl> personList = PersonNode.searchGrandSons(person);
+            for(PersonImpl person1 : personList){
+                if(person1.getName().equalsIgnoreCase("Gregory2Child1")){
+                    Assert.assertEquals("Gregory2Child1", person1.getName());
+                }
+            }
 
         }
 
         @Test
         public void searchGrandDaughters () {
+            Assert.assertNotNull(PersonNodeTest.stubPersonObject());
+            mock(PersonNode.class);
+            NodeImpl<PersonImpl> nodeResult = PersonNode.createFamilytree(PersonNodeTest.stubPersonObject());
+            PersonImpl person = nodeResult.getData();
+            List<PersonImpl> personList = PersonNode.searchGrandDaughters(person);
+            if(personList.isEmpty()){
+                Assert.assertEquals(0, personList.size());
+            }
+
         }
 
         @Test
         public void searchAunts () {
+            Assert.assertNotNull(PersonNodeTest.stubPersonObject());
+            mock(PersonNode.class);
+            PersonImpl person2 = null;
+            PersonImpl person3 = null;
+            PersonImpl person = PersonNodeTest.stubPersonObject();
+            List<PersonImpl> personList = person.getChildrenOfPersonImpls();
+            for(PersonImpl person1 : personList){
+                if(person1.getName().equalsIgnoreCase("Gregory2")){
+                    person2 = person1;
+                }
+            }
+            List<PersonImpl> personList1 = person2.getChildrenOfPersonImpls();
+            for(PersonImpl person1 : personList1){
+                if(person1.getName().equalsIgnoreCase("Gregory2Child1")){
+                    person3 = person1;
+                }
+            }
+            List<PersonImpl> personList2 = PersonNode.searchAunts(person3);
+            if(personList2.isEmpty()){
+                Assert.assertEquals(0, personList2.size());
+            }
         }
 
         @Test
         public void searchUncles () {
-        }
+            Assert.assertNotNull(PersonNodeTest.stubPersonObject());
+            mock(PersonNode.class);
+            PersonImpl person2 = null;
+            PersonImpl person3 = null;
+            PersonImpl person = PersonNodeTest.stubPersonObject();
+            List<PersonImpl> personList = person.getChildrenOfPersonImpls();
+            for(PersonImpl person1 : personList){
+                if(person1.getName().equalsIgnoreCase("Gregory2")){
+                    person2 = person1;
+                }
+            }
+            List<PersonImpl> personList1 = person2.getChildrenOfPersonImpls();
+            for(PersonImpl person1 : personList1){
+                if(person1.getName().equalsIgnoreCase("Gregory2Child1")){
+                    person3 = person1;
+                }
+            }
+            List<PersonImpl> personList2 = PersonNode.searchUncles(person3);
+            for (PersonImpl person1 : personList2){
+                if (person3.getName().equalsIgnoreCase("Gregory1")) {
+                    Assert.assertEquals("Gregory2", person1.getName());
+                }
+            }
 
-        @Test
-        public void setPersonIndex () {
-        }
-
-        @Test
-        public void getPersonMapIndex () {
-        }
-
-        @Test
-        public void setPersonMapIndex () {
         }
 
         public static PersonImpl stubPersonObject () {
