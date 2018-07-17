@@ -8,7 +8,7 @@ Getting Started
 
 Prerequisites
 1. Executables will be provided and execute the run.bat file
-2. Ensure the Config directory and familtree.json is available in the executable file location
+2. Ensure the Config directory and familytree.json is available in the executable file location
 
 Installing
 1. Copy the Executables into any location
@@ -17,6 +17,7 @@ Installing
 Deployment
 This Project is a maven Project.
 Ensure the Config directory and familtree.json is available in the executable file location
+The Config directory will be created when project is built using maven.
 
 Built With
 Maven - Dependency Management
